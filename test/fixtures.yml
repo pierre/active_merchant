@@ -16,6 +16,10 @@ adyen:
   merchant: merchant
   password: password
 
+alfabank:
+  account: account
+  secret: secret
+
 app55:
   api_key: "QDtACYMCFqtuKOQ22QtCkGR1TzD7XM8i"
   api_secret: "yT1FRpuusBIQoEBIfIQ8bPStkl7yzdTz"
