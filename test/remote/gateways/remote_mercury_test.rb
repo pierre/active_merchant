@@ -14,7 +14,7 @@ class RemoteMercuryTest < Test::Unit::TestCase
     @track_data = "%B4003000123456781^LONGSEN/L. ^15121200000000000000**123******?*"
 
     @options = {
-      :order_id => "1",
+      :order_id => "c111111111.1",
       :description => "ActiveMerchant"
     }
     @options_with_billing = @options.merge(
@@ -92,6 +92,7 @@ class RemoteMercuryTest < Test::Unit::TestCase
     response = @gateway.purchase(1100, @credit_card, @options)
     assert_failure response
     assert_equal "DECLINE", response.message
+    assert_equal Gateway::STANDARD_ERROR_CODE[:card_declined], response.error_code
   end
 
   def test_avs_and_cvv_results
