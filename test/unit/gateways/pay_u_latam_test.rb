@@ -26,7 +26,7 @@ class PayULatamTest < Test::Unit::TestCase
     response = @gateway.purchase(@amount, @credit_card, @options)
     assert_success response
 
-    assert_equal '00000000', response.authorization
+    assert_equal '3018500;b5369274-4b51-4cd3-a634-61db79b3eb9c;00000000', response.authorization
     assert response.test?
   end
 
