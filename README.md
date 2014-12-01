@@ -15,3 +15,4 @@ All changes are reported upstream - we'll be able to get rid of this repo once t
 * :x: [QIWI] https://github.com/Shopify/active_merchant/pull/1164 / https://github.com/Shopify/offsite_payments/issues/33
 * :x: [Яндекс] https://github.com/Shopify/active_merchant/pull/1165 / https://github.com/Shopify/offsite_payments/issues/34
 * :x: [CyberSource] https://github.com/Shopify/active_merchant/pull/1413
+* :x: [PayU Latam] https://github.com/Shopify/active_merchant/pull/1475
