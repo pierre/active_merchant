@@ -4,6 +4,8 @@ Kill Bill fork of https://github.com/Shopify/active_merchant, with support for n
 
 All changes are reported upstream - we'll be able to get rid of this repo once the open pull requests have been merged upstream.
 
+For now, the gem is published as [aktivemerchant](http://rubygems.org/gems/aktivemerchant).
+
 ## Pull requests
 
 * :white_check_mark: [PayPal] https://github.com/Shopify/active_merchant/pull/628
