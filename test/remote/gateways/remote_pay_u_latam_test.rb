@@ -1,11 +1,14 @@
 require File.expand_path('../../../test_helper', __FILE__)
 
+# Note: the sandbox doesn't support void, capture nor refund
 class RemotePayULatamTest < Test::Unit::TestCase
   def setup
     # PayULatamGateway's test server has an improperly installed cert
     PayULatamGateway.ssl_strict = false
 
-    @gateway       = PayULatamGateway.new(fixtures(:pay_u_latam))
+    # The tests will work with Brazil only, the payload will be different in other countries
+    # See http://docs.payulatam.com/en/api-integration/proof-of-payment/
+    @gateway       = PayULatamGateway.new(:merchant_id => 500365, :api_login => '403ba744e9827f3', :api_key => '676k86ks53la6tni6clgd30jf6', :country_account_id => '500719')
 
     @amount        = 900
     # Enter APPROVED for the cardholder name value if you want the transaction to be approved or REJECTED if you want it to be rejected
@@ -77,21 +80,13 @@ class RemotePayULatamTest < Test::Unit::TestCase
   def test_successful_purchase
     response = @gateway.purchase(@amount, @credit_card, @options)
     assert_success response
-    assert_equal 'Success', response.message
+    assert_equal 'The transaction was approved', response.message
   end
 
   def test_failed_purchase
     response = @gateway.purchase(@amount, @declined_card, @options)
     assert_failure response
-    assert_equal 'The transaction was rejected by the anti-fraud module', response.message
-  end
-
-  def test_successful_authorize_and_capture
-    auth = @gateway.authorize(@amount, @credit_card, @options)
-    assert_success auth
-
-    assert capture = @gateway.capture(nil, auth.authorization, @options)
-    assert_success capture
+    assert_equal 'The transaction has been declined by the bank or there has been an error with the payment network', response.message
   end
 
   def test_failed_authorize
@@ -99,46 +94,14 @@ class RemotePayULatamTest < Test::Unit::TestCase
     assert_failure response
   end
 
-  def test_partial_capture
-    auth = @gateway.authorize(@amount, @credit_card, @options)
-    assert_success auth
-
-    assert capture = @gateway.capture(@amount-1, auth.authorization)
-    assert_success capture
-  end
-
   def test_failed_capture
     response = @gateway.capture(nil, '', @options)
     assert_failure response
   end
 
-  def test_successful_refund
-    purchase = @gateway.purchase(@amount, @credit_card, @options)
-    assert_success purchase
-
-    assert refund = @gateway.refund(nil, purchase.authorization, @options)
-    assert_success refund
-  end
-
-  def test_partial_refund
-    purchase = @gateway.purchase(@amount, @credit_card, @options)
-    assert_success purchase
-
-    assert refund = @gateway.refund(@amount-1, purchase.authorization, @options)
-    assert_success refund
-  end
-
   def test_failed_refund
     response = @gateway.refund(nil, '', @options)
     assert_failure response
-  end
-
-  def test_successful_void
-    auth = @gateway.authorize(@amount, @credit_card, @options)
-    assert_success auth
-
-    assert void = @gateway.void(auth.authorization, @options)
-    assert_success void
   end
 
   def test_failed_void
