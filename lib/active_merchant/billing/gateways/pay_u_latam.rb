@@ -106,7 +106,6 @@ module ActiveMerchant #:nodoc:
 
       def store(payment, options = {})
         requires!(options, :language)
-        #requires!(options, :order_id, :language, :description)
         commit(:store, nil, payment, nil, options)
       end
 
