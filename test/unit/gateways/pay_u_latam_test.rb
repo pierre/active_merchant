@@ -37,39 +37,6 @@ class PayULatamTest < Test::Unit::TestCase
     assert_failure response
   end
 
-  def test_successful_authorize
-  end
-
-  def test_failed_authorize
-  end
-
-  def test_successful_capture
-  end
-
-  def test_failed_capture
-  end
-
-  def test_successful_refund
-  end
-
-  def test_failed_refund
-  end
-
-  def test_successful_void
-  end
-
-  def test_failed_void
-  end
-
-  def test_successful_verify
-  end
-
-  def test_successful_verify_with_failed_void
-  end
-
-  def test_failed_verify
-  end
-
   private
 
   def successful_purchase_response
@@ -78,31 +45,5 @@ class PayULatamTest < Test::Unit::TestCase
 
   def failed_purchase_response
     "{\"code\":\"SUCCESS\",\"error\":null,\"transactionResponse\":{\"orderId\":3018500,\"transactionId\":\"b5369274-4b51-4cd3-a634-61db79b3eb9c\",\"state\":\"DECLINED\",\"paymentNetworkResponseCode\":null,\"paymentNetworkResponseErrorMessage\":null,\"trazabilityCode\":null,\"authorizationCode\":null,\"pendingReason\":null,\"responseCode\":\"ENTITY_DECLINED\",\"errorCode\":null,\"responseMessage\":null,\"transactionDate\":null,\"transactionTime\":null,\"operationDate\":null,\"extraParameters\":null}}"
-  end
-
-  def successful_authorize_response
-    successful_purchase_response
-  end
-
-  def failed_authorize_response
-    failed_purchase_response
-  end
-
-  def successful_capture_response
-  end
-
-  def failed_capture_response
-  end
-
-  def successful_refund_response
-  end
-
-  def failed_refund_response
-  end
-
-  def successful_void_response
-  end
-
-  def failed_void_response
   end
 end
